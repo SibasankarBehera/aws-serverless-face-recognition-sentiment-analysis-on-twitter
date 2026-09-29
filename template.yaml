@@ -356,6 +356,16 @@ Resources:
       Environment:
         Variables:
           BUCKET_NAME: !Ref Bucket
+          # Comma-separated DetectFaces attribute set. Valid values:
+          # DEFAULT, ALL, AGE_RANGE, BEARD, EMOTIONS, EYE_DIRECTION, EYEGLASSES,
+          # EYES_OPEN, GENDER, MOUTH_OPEN, MUSTACHE, FACE_OCCLUDED, SMILE, SUNGLASSES.
+          # "ALL" preserves the previous behavior; downstream requires at least
+          # GENDER, EMOTIONS and AGE_RANGE (all included in ALL).
+          REKOGNITION_FACE_ATTRIBUTES: "ALL"
+          # Minimum confidence (0-100) for DetectModerationLabels. Default 50.
+          MODERATION_MIN_CONFIDENCE: "50"
+          # Exponential-backoff retry attempts for Rekognition calls. Default 5.
+          REKOGNITION_MAX_RETRIES: "5"
       Policies:
         - S3CrudPolicy:
             BucketName:
